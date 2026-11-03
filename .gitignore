@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Environments and secrets
+.venv/
+.env
+
+# Tool caches
+.ruff_cache/
+.pytest_cache/
+
+# Eval raw traces (dated summaries are committed)
+evals/results/raw/

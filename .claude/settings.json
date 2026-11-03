@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(python3 -c \"import json,sys; print(json.load(sys.stdin)['tool_input']['file_path'])\"); case \"$f\" in *.py) \"$CLAUDE_PROJECT_DIR/.venv/bin/ruff\" format --quiet \"$f\";; esac 2>/dev/null || true",
+            "timeout": 30,
+            "statusMessage": "ruff format"
+          }
+        ]
+      }
+    ]
+  }
+}
