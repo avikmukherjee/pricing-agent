@@ -15,3 +15,6 @@ dist/
 
 # Eval raw traces (dated summaries are committed)
 evals/results/raw/
+
+# Private session handover (resume, job search) — never commit
+handover.md
