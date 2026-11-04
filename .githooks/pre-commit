@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Block private files and likely secrets from being committed (this repo is public).
+# Enable once per clone: git config core.hooksPath .githooks
+set -u
+fail=0
+
+# 1. Private files, even if force-added past .gitignore.
+while IFS= read -r f; do
+  case "$f" in
+    handover.md|.env|.env.*)
+      [ "$f" = ".env.example" ] && continue
+      echo "pre-commit: refusing to commit private file: $f" >&2; fail=1 ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACMR)
+
+# 2. Likely secrets in added lines (this hook file itself is exempt).
+pattern='(sk-ant-[A-Za-z0-9_-]{20,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)'
+if git diff --cached -U0 --diff-filter=ACMR -- . ':(exclude).githooks/' \
+   | grep -E '^\+[^+]' | grep -qE "$pattern"; then
+  echo "pre-commit: staged changes contain what looks like a secret (API key/token/private key)." >&2
+  fail=1
+fi
+
+[ "$fail" -eq 0 ] || { echo "pre-commit: commit blocked. Unstage with: git restore --staged <file>" >&2; exit 1; }

@@ -12,6 +12,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd \"$CLAUDE_PROJECT_DIR\" && { echo \"=== handover.md (private, gitignored) ===\"; cat handover.md 2>/dev/null || echo \"(missing)\"; echo; echo \"=== PLAN.md Status ===\"; sed -n \"/^## Status/,/^## 1\\./p\" PLAN.md | sed \"\\$d\"; } 2>/dev/null || true",
+            "timeout": 10
+          }
+        ]
+      }
     ]
   }
 }
