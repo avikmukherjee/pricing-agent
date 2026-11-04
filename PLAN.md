@@ -2,8 +2,8 @@
 
 ## Status (session handoff — update at end of each session)
 - **Done:** CLAUDE.md, PLAN.md drafted. Open decisions (§4) accepted as defaults: Claude via Anthropic SDK with hand-written loop; maximize margin; abstention key by scenario design; pandas + statsmodels; constant elasticity for v1.
-- **Done (Phase 0, 2026-11-03):** git repo (main), `.venv` (Python 3.14.4), editable install of `promo_agent` (src layout, hatchling), dev group (ruff, pytest) via `pip install -e . --group dev`. `ruff check`, `ruff format --check`, `pytest` (1 smoke test) all pass. Runtime deps intentionally empty; add per phase. Committed (627f11b, amended). PostToolUse hook in `.claude/settings.json` runs ruff format on edited .py files.
-- **Next:** add GitHub remote + push, then Phase 1 (synthetic data generator).
+- **Done (Phase 0, 2026-11-03):** git repo (main), `.venv` (Python 3.14.4), editable install of `promo_agent` (src layout, hatchling), dev group (ruff, pytest) via `pip install -e . --group dev`. `ruff check`, `ruff format --check`, `pytest` (1 smoke test) all pass. Runtime deps intentionally empty; add per phase. Committed and pushed (7da0efc on origin/main). PostToolUse hook in `.claude/settings.json` runs ruff format on edited .py files.
+- **Next:** Phase 1 (synthetic data generator).
 - **Phase 4 note:** turn on prompt caching for the system prompt + tool definitions in the agent's API calls; log cache hits alongside the other token counts.
 - **Open issues:** none.
 
